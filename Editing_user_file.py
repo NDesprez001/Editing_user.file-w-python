@@ -1,5 +1,8 @@
 import json
 
+
+## ORIGINAL USERS.FILE
+
 # users = [
 #   {
 #     'first_name': 'John',
@@ -35,27 +38,46 @@ import json
 
 
 
-with open('users.json','r') as jfile:
-  info = json.load(jfile)
+## LOGIN_FUNCTION 
 
-# for d in info:
-#   if d['first_name'] == 'Rachel':
-#     print(d)
+# with open('users.json','r') as jfile:
+#   info = json.load(jfile)
 
+# def login():
+#   username = input('Enter username here:')
+#   password = input('Enter password here:')
+#   with open('users.json','r') as jfile:
+#     info = json.load(jfile)
 
-def login():
-  username = input('Enter username here:')
-  password = input('Enter password here:')
-  with open('users.json','r') as jfile:
-    info = json.load(jfile)
-
-  user_found = False
-  for d in info:
-    if d['first_name'] == username and d['password'] == password:
-      print('Access granted')
-      print(d)
-      user_found = True
-  if not user_found:
-    print("User not found 404")
+#   user_found = False
+#   for d in info:
+#     if d['first_name'] == username and d['password'] == password:
+#       print('Access granted')
+#       print(d)
+#       user_found = True
+#   if not user_found:
+#     print("User not found 404")
       
-login()
+# login()
+
+## LOGIN_FUNCTION (version 2)
+
+with open('users.json','r') as jfile:
+  users = json.load(jfile)
+
+def login(a, b):
+  for user in users:
+    if user['first_name'] == a and user['password'] == b:
+      return user
+  return None
+
+username = input('Enter username: ')
+password = input('Enter password: ')
+
+response = login(username, password)
+
+if response is not None:
+  print("Welcome " + response['first_name'] + response['last_name'])
+  print(response)
+else:
+  print('User not found 404')
