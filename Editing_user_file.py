@@ -84,30 +84,57 @@ import json
 
 ## REGISTER_FUNCTION (add/creating a new user)
 
+# with open('users.json','r') as jfile:
+#    user = json.load(jfile)
+
+
+# def register(a):
+#   user.append(a)
+#   print('Successfully added')
+
+
+# first_name = input('Enter first name: ')
+# last_name = input('Enter last name: ')
+# email = input('Enter email: ')
+# address = input('Enter address: ')
+# password = input('Enter password: ')
+
+# new_user = {
+#   'first_name': first_name,
+#   'last_name': last_name,
+#   'email': email,
+#   'address': address,
+#   'password': password
+# }
+# register(new_user)
+
+
+# with open('users.json','w') as jfile:
+#   json.dump(user, jfile)
+
+## REMOVING AN EXISTING USER 
+
 with open('users.json','r') as jfile:
-   user = json.load(jfile)
+  user = json.load(jfile)
 
 
-def register(a):
-  user.append(a)
-  print('Successfully added')
 
+def remove(a):
+  new_list = []
+  for key in user:
+    if a != key['email']:
+      new_list.append(key)
 
-first_name = input('Enter first name: ')
-last_name = input('Enter last name: ')
-email = input('Enter email: ')
-address = input('Enter address: ')
-password = input('Enter password: ')
+  return new_list
+ 
+def save(a):
+  with open('users.json','w') as jfile:
+    json.dump(a, jfile)
 
-new_user = {
-  'first_name': first_name,
-  'last_name': last_name,
-  'email': email,
-  'address': address,
-  'password': password
-}
-register(new_user)
+user_email = input('Enter you email here: ')
+r = remove(user_email)
 
-
+save(r)
+print('Successfully removed')
 with open('users.json','w') as jfile:
-  json.dump(user, jfile)
+  json.dump(r, jfile)
