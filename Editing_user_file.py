@@ -62,22 +62,52 @@ import json
 
 ## LOGIN_FUNCTION (version 2)
 
+# with open('users.json','r') as jfile:
+#   users = json.load(jfile)
+
+# def login(a, b):
+#   for user in users:
+#     if user['first_name'] == a and user['password'] == b:
+#       return user
+#   return None
+
+# username = input('Enter username: ')
+# password = input('Enter password: ')
+
+# response = login(username, password)
+
+# if response is not None:
+#   print("Welcome " + response['first_name'] + response['last_name'])
+#   print(response)
+# else:
+#   print('User not found 404')
+
+## REGISTER_FUNCTION (add/creating a new user)
+
 with open('users.json','r') as jfile:
-  users = json.load(jfile)
+   user = json.load(jfile)
 
-def login(a, b):
-  for user in users:
-    if user['first_name'] == a and user['password'] == b:
-      return user
-  return None
 
-username = input('Enter username: ')
+def register(a):
+  user.append(a)
+  print('Successfully added')
+
+
+first_name = input('Enter first name: ')
+last_name = input('Enter last name: ')
+email = input('Enter email: ')
+address = input('Enter address: ')
 password = input('Enter password: ')
 
-response = login(username, password)
+new_user = {
+  'first_name': first_name,
+  'last_name': last_name,
+  'email': email,
+  'address': address,
+  'password': password
+}
+register(new_user)
 
-if response is not None:
-  print("Welcome " + response['first_name'] + response['last_name'])
-  print(response)
-else:
-  print('User not found 404')
+
+with open('users.json','w') as jfile:
+  json.dump(user, jfile)
